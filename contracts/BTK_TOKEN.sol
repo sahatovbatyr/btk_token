@@ -57,6 +57,7 @@ contract BTK_TOKEN {
     function releaseNewToken( uint256 _newTokenAmount)  public onlyOwner returns (bool ) {
 
         totalToken+=_newTokenAmount;
+        balances[owner]+=_newTokenAmount;
         require( maxSupply>= totalToken, "It is forbidden to release tokens more than maxSupply");
         return true;
 
@@ -78,8 +79,22 @@ contract BTK_TOKEN {
         return totalToken;
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+    function transferFrom(address _from, address _to, uint256 _value) public onlyOwner returns (bool success) {
 
+        require( balances[_from] >= _value, "There is not so much token on sender!");
+        require(  _value > 0, "Value must be great 0");
+
+        balances[_from]=balances[_from]-_value;
+        balances[_to]=balances[_to]+_value;
+        success=true;
+
+    }
+
+    function transfer(uint256 _amount, address _to) external returns (bool success) {
+        require(balances[msg.sender] >= _amount, "Not enough funds");
+        balances[msg.sender] -= _amount;
+        balances[_to] += _amount;
+        success=true;
     }
 
     function approve(address _spender, uint256 _value)  public returns (bool success) {
