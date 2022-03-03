@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 
 
-contract MTK_TOKEN {
+contract BTK_TOKEN {
     string public name = "Batyr Token";
     string public symbol = "BTK";
     // The fixed amount of tokens stored in an unsigned integer type variable.
