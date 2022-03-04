@@ -65,14 +65,14 @@ describe("BTK_TOKEN", function () {
 
     describe("transfer", function(){
 
-        // it ("should be fail when not enough fund", async function(){
+        it ("should be fail when not enough fund", async function(){
 
-        //     let amount = ethers.utils.parseEther("1000");
+            let amount = ethers.utils.parseEther("1000");
 
-        //     await expect(  contract.connect(acc1).transfer(amount, acc2.address ))
-        //     .to.be.revertedWith("There is not so much token on sender!");
+            await expect(  contract.connect(acc1).transfer(amount, acc2.address ))
+            .to.be.revertedWith("There is not so much token on sender!");
 
-        // })
+        })
 
         it ("should be pass when enough fund", async function(){
             
