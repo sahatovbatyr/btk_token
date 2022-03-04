@@ -16,7 +16,7 @@ async function main() {
     const token = await Token.deploy();
     await token.deployed();
 
-    console.log("Token address:", token.address);
+    console.log("Contract deployed at:", token.address);
 
   }
 

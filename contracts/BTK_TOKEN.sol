@@ -23,13 +23,16 @@ contract BTK_TOKEN {
     event TransferEvent(address indexed _from, address indexed _to, uint256 _value);
     event ApprovalEvent(address indexed _owner, address indexed _spender, uint256 _value);
 
-    uint256  maxSupply=1000000*10^18;
+    uint256  maxSupply;
     
-    constructor() {
+    constructor( uint256 _totalToken ) {
         // The totalSupply is assigned to transaction sender, which is the account
         // that is deploying the contract.
-        balances[msg.sender] = totalToken;
+        totalToken= _totalToken;
+        balances[msg.sender] = _totalToken;
         owner = msg.sender;
+        maxSupply=1000000*(10**18);
+        
     }
     
     // Modifier to check that the caller is the owner of
@@ -37,28 +40,22 @@ contract BTK_TOKEN {
     modifier onlyOwner(){
         require( msg.sender == owner, "Caller is not the owner");
         _;
-    }
-
-    function transfer(address to, uint256 amount) external {
-        // Check if the transaction sender has enough tokens.
-        // If `require`'s first argument evaluates to `false` then the
-        // transaction will revert.
-        require(balances[msg.sender] >= amount, "Not enough tokens");
-        // Transfer the amount.
-        balances[msg.sender] -= amount;
-        balances[to] += amount;
-    }
+    }    
 
     function getDecimals() public view returns (uint8) {
         return decimals;
+    }
+
+     function getTotalToken() public view returns (uint256) {
+        return totalToken;
     }
 
     //Release new tokens
     function releaseNewToken( uint256 _newTokenAmount)  public onlyOwner returns (bool ) {
 
         totalToken+=_newTokenAmount;
-        balances[owner]+=_newTokenAmount;
-        require( maxSupply>= totalToken, "It is forbidden to release tokens more than maxSupply");
+        balances[owner]+=_newTokenAmount;        
+        require( maxSupply>= totalToken,  "It is forbidden to release tokens more than maxSupply");
         return true;
 
     }
@@ -75,7 +72,11 @@ contract BTK_TOKEN {
         return balances[account];
     }
 
-    function _totalSupply() public view returns (uint256){
+    function getMaxToken() public view returns (uint256){
+        return maxSupply;
+    }
+
+    function totalSupply() public view returns (uint256){
         return totalToken;
     }
 
@@ -90,7 +91,7 @@ contract BTK_TOKEN {
 
     }
 
-    function transfer(uint256 _amount, address _to) external returns (bool success) {
+    function transfer( address _to, uint256 _amount)  public returns (bool success) {
         require(balances[msg.sender] >= _amount, "Not enough funds");
         balances[msg.sender] -= _amount;
         balances[_to] += _amount;
