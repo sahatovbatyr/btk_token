@@ -4,13 +4,12 @@ This project demonstrates a basic Hardhat use case. It comes with a sample contr
 
 ## Deploy contract to remote and local server 
 
-1. you shoul create .env file in root folder your project.  
-
+1. you shoul create .env file in root folder your project.<br/><br/>
 2. create these varablies:  
 
-    //WARNING this need to deploy the contract remote NETWORK (ROPSTEN, RINKEBY ...)
-    // if you want to deploy the contract to hardhat localhost don't create this varaible
-   - ALCHEMY_API_KEY ="example-your-alchemy-project-api-key"     
+    //WARNING this need to deploy the contract remote NETWORK (ROPSTEN, RINKEBY ...) <br/>  
+    // if you want to deploy the contract to hardhat localhost don't create this varaible <br/>
+   - ALCHEMY_API_KEY ="example-your-alchemy-project-api-key" <br/>    
 
     
    - CONTRACT_DEPLOYER_WALLET_PRIVATE_KEY="private-key-metamask-account-key"  
