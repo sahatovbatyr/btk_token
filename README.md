@@ -4,7 +4,7 @@ This project demonstrates a basic Hardhat use case. It comes with a sample contr
 
 ## Deploy contract to remote and local server 
 
-1. you shoul create .env file in root folder your project.<br/><br/>
+1. you shoul create .env file in root folder your project.<br/>
 2. create these varablies:  
 
     //WARNING this need to deploy the contract remote NETWORK (ROPSTEN, RINKEBY ...) <br/>  
